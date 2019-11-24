@@ -64,17 +64,18 @@ lcdController.prototype.onStart = function() {
 					}
 				  });
 			  }, 1000);*/
+			  console.log(new Date().toISOString().substring(11, 19))
 			  lcdController.print(new Date().toISOString().substring(11, 19), err => {
 				if (err) {
 				  console.log(err);
 				}
 			  });
-		} else if(data.status === "playing") {
+		} else if(data.status === "play") {
 			lcd.setCursor(0, 0);
 			lcd.print(data.title);
-			lcd.setCursor(0, 1);
-			lcd.print(data.artist);
 			lcd.setCursor(0, 2);
+			lcd.print(data.artist);
+			lcd.setCursor(0, 1);
 			lcd.print(data.album);
 		}
   				}
