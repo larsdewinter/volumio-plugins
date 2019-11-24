@@ -65,7 +65,8 @@ lcdController.prototype.onStart = function() {
 				  });
 			  }, 1000);*/
 			  console.log(new Date().toISOString().substring(11, 19))
-			  lcdController.print(new Date().toISOString().substring(11, 19), err => {
+			  lcd.setCursor(0, 0);
+			  lcd.print(new Date().toISOString().substring(11, 19), err => {
 				if (err) {
 				  console.log(err);
 				}
