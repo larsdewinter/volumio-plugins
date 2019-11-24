@@ -1,12 +1,12 @@
 'use strict';
 
 const Lcd = require('lcd');
-const lcd = new Lcd({rs: 26, e: 24, data: [22, 18, 16, 12], cols: 20, rows: 4});
+const lcdController = new Lcd({rs: 7, e: 8, data: [25, 24, 23, 18], cols: 20, rows: 4});
 
-lcd.on('ready', _ => {
+lcdController.on('ready', _ => {
   setInterval(_ => {
-    lcd.setCursor(0, 0);
-    lcd.print(new Date().toISOString().substring(11, 19), err => {
+    lcdController.setCursor(0, 0);
+    lcdController.print(new Date().toISOString().substring(11, 19), err => {
       if (err) {
         throw err;
       }
@@ -16,6 +16,6 @@ lcd.on('ready', _ => {
 
 // If ctrl+c is hit, free resources and exit.
 process.on('SIGINT', _ => {
-  lcd.close();
+  lcdController.close();
   process.exit();
 });
