@@ -37,7 +37,7 @@ lcdController.prototype.onVolumioStart = function()
 		  lcd.setCursor(0, 0);
 		  lcd.print("Starting radio", err => {
 			if (err) {
-			  throw err;
+			  console.log(err);
 			}
 		  });
 	  });
@@ -76,7 +76,7 @@ lcdController.prototype.onStart = function() {
 lcdController.prototype.onStop = function() {
     var self = this;
     var defer=libQ.defer();
-
+	lcd.close();
     // Once the Plugin has successfull stopped resolve the promise
     defer.resolve();
 
