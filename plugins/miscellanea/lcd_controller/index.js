@@ -56,22 +56,17 @@ lcdController.prototype.onStart = function() {
 	socket.emit('getState', '')
 	socket.on('pushState', function(data) {
 		if(data.status === "stop") {
-			/*intervalId = setInterval(_ => {
+			intervalId = setInterval(_ => {
+				lcd.clear()
 				lcd.setCursor(0, 0);
-				lcdController.print(new Date().toISOString().substring(11, 19), err => {
+				lcd.print(new Date().toISOString().substring(11, 19), err => {
 					if (err) {
 					  console.log(err);
 					}
 				  });
-			  }, 1000);*/
-			  console.log(new Date().toISOString().substring(11, 19))
-			  lcd.setCursor(0, 0);
-			  lcd.print(new Date().toISOString().substring(11, 19), err => {
-				if (err) {
-				  console.log(err);
-				}
-			  });
+			  }, 1000);
 		} else if(data.status === "play") {
+			lcd.clear()
 			lcd.setCursor(0, 0);
 			lcd.print(data.title);
 			lcd.setCursor(0, 2);
