@@ -56,23 +56,26 @@ lcdController.prototype.onStart = function() {
 	socket.emit('getState', '')
 	socket.on('pushState', function(data) {
 		if(data.status === "stop") {
-			intervalId = setInterval(_ => {
-				lcd.clear()
-				lcd.setCursor(0, 0);
-				lcd.print(new Date().toISOString().substring(11, 19), err => {
+			lcd.on('ready', _ => {
+				intervalId = setInterval(_ => {
+				  lcd.setCursor(0, 0);
+				  lcd.print(new Date().toISOString().substring(11, 19), err => {
 					if (err) {
-					  console.log(err);
+					  throw err;
 					}
 				  });
-			  }, 1000);
+				}, 1000);
+			  });
 		} else if(data.status === "play") {
-			lcd.clear()
-			lcd.setCursor(0, 0);
-			lcd.print(data.title);
-			lcd.setCursor(0, 2);
-			lcd.print(data.artist);
-			lcd.setCursor(0, 1);
-			lcd.print(data.album);
+			lcd.on('ready', _ => {
+				clearInterval(intervalId);
+				lcd.setCursor(0, 0);
+				lcd.print(data.title);
+				lcd.setCursor(0, 2);
+				lcd.print(data.artist);
+				lcd.setCursor(0, 1);
+				lcd.print(data.album);
+			});
 		}
   				}
 		);
