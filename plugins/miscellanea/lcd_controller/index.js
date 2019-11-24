@@ -56,7 +56,6 @@ lcdController.prototype.onStart = function() {
 	socket.emit('getState', '')
 	socket.on('pushState', function(data) {
 		if(data.status === "stop") {
-			lcd.on('ready', _ => {
 				intervalId = setInterval(_ => {
 				  lcd.setCursor(0, 0);
 				  lcd.print(new Date().toISOString().substring(11, 19), err => {
@@ -65,9 +64,7 @@ lcdController.prototype.onStart = function() {
 					}
 				  });
 				}, 1000);
-			  });
 		} else if(data.status === "play") {
-			lcd.on('ready', _ => {
 				clearInterval(intervalId);
 				lcd.setCursor(0, 0);
 				lcd.print(data.title);
@@ -75,7 +72,6 @@ lcdController.prototype.onStart = function() {
 				lcd.print(data.artist);
 				lcd.setCursor(0, 1);
 				lcd.print(data.album);
-			});
 		}
   				}
 		);
