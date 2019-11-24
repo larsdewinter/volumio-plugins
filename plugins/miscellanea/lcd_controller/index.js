@@ -31,6 +31,14 @@ lcdController.prototype.onVolumioStart = function()
 	this.config = new (require('v-conf'))();
 	this.config.loadFile(configFile);
 
+	lcd.on('ready', _ => {
+		  lcd.setCursor(0, 0);
+		  lcd.print("Starting radio", err => {
+			if (err) {
+			  throw err;
+			}
+		  });
+	  });
     return libQ.resolve();
 }
 
