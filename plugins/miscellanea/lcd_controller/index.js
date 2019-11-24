@@ -10,7 +10,7 @@ var io = require('socket.io-client')
 var intervalId;
 
 const Lcd = require('lcd');
-const lcd = new Lcd({rs: 7, e: 8, data: [25, 24, 23, 18], cols: 20, rows: 4});
+const lcdController = new Lcd({rs: 7, e: 8, data: [25, 24, 23, 18], cols: 20, rows: 4});
 
 
 module.exports = lcdController;
@@ -33,9 +33,9 @@ lcdController.prototype.onVolumioStart = function()
 	this.config = new (require('v-conf'))();
 	this.config.loadFile(configFile);
 
-	lcd.on('ready', _ => {
-		  lcd.setCursor(0, 0);
-		  lcd.print("Starting radio", err => {
+	lcdController.on('ready', _ => {
+		  lcdController.setCursor(0, 0);
+		  lcdController.print("Starting radio", err => {
 			if (err) {
 			  console.log(err);
 			}
@@ -57,13 +57,16 @@ lcdController.prototype.onStart = function() {
 	socket.on('pushState', function(data) {
     					if(data.status === "stop") {
 							intervalId = setInterval(_ => {
-								lcd.setCursor(0, 0);
-								lcd.print(new Date().toISOString().substring(11, 19), err => {
-								  if (err) {
-									throw err;
-								  }
-								});
+								lcdController.setCursor(0, 0);
+								lcdController.print(new Date().toISOString().substring(11, 19));
 							  }, 1000);
+						} else if(data.status === "playing") {
+							lcdController.setCursor(0, 0);
+							lcdController.print(data.title);
+							lcdController.setCursor(0, 1);
+							lcdController.print(data.artist);
+							lcdController.setCursor(0, 2);
+							lcdController.print(data.album);
 						}
   				}
 		);
@@ -76,7 +79,7 @@ lcdController.prototype.onStart = function() {
 lcdController.prototype.onStop = function() {
     var self = this;
     var defer=libQ.defer();
-	lcd.close();
+	lcdController.close();
     // Once the Plugin has successfull stopped resolve the promise
     defer.resolve();
 
