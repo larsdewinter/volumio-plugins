@@ -10,7 +10,7 @@ var io = require('socket.io-client')
 var intervalId;
 
 const Lcd = require('lcd');
-const lcd = new Lcd({rs: 26, e: 24, data: [22, 18, 16, 12], cols: 20, rows: 4});
+const lcd = new Lcd({rs: 7, e: 8, data: [25, 24, 23, 18], cols: 20, rows: 4});
 
 
 module.exports = lcdController;
