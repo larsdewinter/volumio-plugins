@@ -7,6 +7,8 @@ var exec = require('child_process').exec;
 var execSync = require('child_process').execSync;
 var io = require('socket.io-client')
 
+var intervalId;
+
 const Lcd = require('lcd');
 const lcd = new Lcd({rs: 26, e: 24, data: [22, 18, 16, 12], cols: 20, rows: 4});
 
@@ -53,7 +55,16 @@ lcdController.prototype.onStart = function() {
 	var socket = io.connect('http://localhost:3000');
 	socket.emit('getState', '')
 	socket.on('pushState', function(data) {
-    					console.log(data.status);
+    					if(data.status === "stop") {
+							intervalId = setInterval(_ => {
+								lcd.setCursor(0, 0);
+								lcd.print(new Date().toISOString().substring(11, 19), err => {
+								  if (err) {
+									throw err;
+								  }
+								});
+							  }, 1000);
+						}
   				}
 		);
 
