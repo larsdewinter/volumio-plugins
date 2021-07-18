@@ -104,6 +104,7 @@ try:
         if(str(text_scroll) == "1"):
             # Value is 1, scroll the text if too long
             while(True):
+                print(info)
                 # Check for updates on the information we have
                 if(music_info.check_for_updates() !=  False):
                     sleep(0.5)
