@@ -100,7 +100,7 @@ try:
     trackType = info['trackType']
     status = info['status']
     title_splitter_found = False
-    
+    print(info)
     if(text_scroll > 0):
         if(str(text_scroll) == "1"):
             # Value is 1, scroll the text if too long
