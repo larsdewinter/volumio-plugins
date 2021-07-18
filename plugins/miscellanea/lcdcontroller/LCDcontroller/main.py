@@ -101,8 +101,8 @@ try:
 	status = info['status']
 	title_splitter_found = False
 	if(text_scroll > 0):
-        print(info)
-		if(str(text_scroll) == "1"):
+            print(info)
+        if(str(text_scroll) == "1"):
 			# Value is 1, scroll the text if too long
 			while(True):
 				# Check for updates on the information we have
@@ -144,9 +144,9 @@ try:
 
 					elif(str(trackType) != 'webradio' and info_configured == False and status != 'stop'):
 						# If every information we need is present, display it
-						if(len(str(title)) > 0 and len(str(artist)) > 0 and len(str(album)) > 0):
-							LCD_line_one = str(title)
-							LCD_line_two = str(artist)
+                        if(len(str(title)) > 0 and len(str(artist)) > 0 and len(str(album)) > 0):
+						    LCD_line_one = str(title)
+                            LCD_line_two = str(artist)
 							if(len(str(album)) > 0):
 								LCD_line_three = str(album)
 							else:
