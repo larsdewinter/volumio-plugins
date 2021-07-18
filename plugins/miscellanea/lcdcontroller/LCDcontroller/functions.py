@@ -51,13 +51,13 @@ class MusicInfo():
         # The info has changed, return the new info
             if new_info['title'] is None:
                 new_info['title'] = ' '
-                self.info = new_info
+            self.info = new_info
             return True
         elif(new_info['artist'] != current_info['artist']):
             # The info has changed, return the new info
             if new_info['artist'] is None:
                 new_info['artist'] = ' '
-                self.info = new_info
+            self.info = new_info
             return True
         elif(new_info['album'] != current_info['album']):
             # The info has changed, return the new info
