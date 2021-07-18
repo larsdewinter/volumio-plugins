@@ -10,6 +10,10 @@ from math import *
 
 #import LCD-related python libs
 from lcd_display import lcd
+
+def xstr(s):
+    return '' if s is None else str(s)
+
 #make sure python knows what an LCD is
 my_lcd = lcd()
 
@@ -118,13 +122,13 @@ try:
                     info_configured = False
                 # Extract title, artist and album from new info
                 if(info_configured == False):
-                    title = str(info['title'])
-                    artist = str(info['artist'])
-                    album = str(info['album'])
-                    trackType = str(info['trackType'])
-                    status = str(info['status'])
+                    title = xstr(info['title'])
+                    artist = xstr(info['artist'])
+                    album = xstr(info['album'])
+                    trackType = xstr(info['trackType'])
+                    status = xstr(info['status'])
 
-                    if(str(trackType) == 'webradio' and info_configured == False and status != 'stop'):
+                    if(xstr(trackType) == 'webradio' and info_configured == False and status != 'stop'):
                         # Webradio's always display their song-info in the title-value and their radio station in the artist-value,
                         # This creates a small problem: <song name>-<song artist> is a one-liner. This text needs to be split into 2 lines
                         # This for-loop starts at 1 and ends at title-1, because i want to ignore any '-' at the beginning and end of the 'title'
@@ -132,31 +136,31 @@ try:
                         if(status == 'play'):
                             # Display information about current webradio music
                             if(type(title) == list and len(title) == 2):
-                                LCD_line_one = str(title[0])
-                                LCD_line_two = str(title[1])
-                                LCD_line_three = str(artist)
+                                LCD_line_one = xstr(title[0])
+                                LCD_line_two = xstr(title[1])
+                                LCD_line_three = xstr(artist)
                                 LCD_line_four = ' '
                             else:
-                                LCD_line_one = str(title)
-                                LCD_line_two = str(artist)
+                                LCD_line_one = xstr(title)
+                                LCD_line_two = xstr(artist)
                                 LCD_line_three = ' '
                                 LCD_line_four = ' '
                     elif(str(trackType) != 'webradio' and info_configured == False and status != 'stop'):
                         # If every information we need is present, display it
                         if(len(str(title)) > 0 and len(str(artist)) > 0 and len(str(album)) > 0):
-                            LCD_line_one = str(title)
-                            LCD_line_two = str(artist)
+                            LCD_line_one = xstr(title)
+                            LCD_line_two = xstr(artist)
                             if(len(str(album)) > 0):
-                                LCD_line_three = str(album)
+                                LCD_line_three = xstr(album)
                             else:
                                 LCD_line_three = " "
                             LCD_line_four = " "
                         # If some information is present, display it
                         elif(len(str(title)) > 0 and len(str(artist)) > 0):
-                            LCD_line_one = str(title)
-                            LCD_line_two = str(artist)
+                            LCD_line_one = xstr(title)
+                            LCD_line_two = xstr(artist)
                             if(len(str(album)) > 0):
-                                LCD_line_three = str(album)
+                                LCD_line_three = xstr(album)
                             else:
                                 LCD_line_three = " "
                             LCD_line_four = " "
@@ -172,10 +176,10 @@ try:
                             
                             title = music_info.split_text(title)
                             if(len(str(title[1])) > 0):
-                                LCD_line_one = str(title[0])
-                                LCD_line_two = str(title[1])
+                                LCD_line_one = xstr(title[0])
+                                LCD_line_two = xstr(title[1])
                                 if(len(str(album)) > 0):
-                                    LCD_line_three = str(album)
+                                    LCD_line_three = xstr(album)
                                 else:
                                     LCD_line_three = " "
                         if(status == 'pause'):
@@ -191,16 +195,16 @@ try:
                             LCD_line_four = " "
 
                 # Fix types in case they have weird types like chars/arrays
-                LCD_line_one = str(LCD_line_one)
-                LCD_line_two = str(LCD_line_two)
-                LCD_line_three = str(LCD_line_three)
-                LCD_line_four = str(LCD_line_four)
+                LCD_line_one = xstr(LCD_line_one)
+                LCD_line_two = xstr(LCD_line_two)
+                LCD_line_three = xstr(LCD_line_three)
+                LCD_line_four = xstr(LCD_line_four)
 
                     # The following lines of code handle the output to the first line of the LCD
                 if(len(LCD_line_one) > 20):
                     if text_split_string_setting not in LCD_line_one:
                         #Add text-separator to text
-                        LCD_line_one = LCD_line_one + str(text_split_string_setting)
+                        LCD_line_one = LCD_line_one + xstr(text_split_string_setting)
                             # Scroll the first part of the text
                         if(LCD_line_one_scroll_counter<len(LCD_line_one)):
                             sendToLCD(0, LCD_line_one[LCD_line_one_scroll_counter-20:LCD_line_one_scroll_counter])
@@ -223,7 +227,7 @@ try:
                 if(len(LCD_line_two) > 20):
                     if text_split_string_setting not in LCD_line_two:
                         #Add text-separator to text
-                        LCD_line_two = LCD_line_two + str(text_split_string_setting)
+                        LCD_line_two = LCD_line_two + xstr(text_split_string_setting)
                             # Scroll the first part of the text
                         if(LCD_line_two_scroll_counter<len(LCD_line_two)):
                             sendToLCD(1, LCD_line_two[LCD_line_two_scroll_counter-20:LCD_line_two_scroll_counter])
@@ -246,7 +250,7 @@ try:
                 if(len(LCD_line_three) > 20):
                     if text_split_string_setting not in LCD_line_three:
                         #Add text-separator to text
-                        LCD_line_three = LCD_line_three + str(text_split_string_setting)
+                        LCD_line_three = LCD_line_three + xstr(text_split_string_setting)
                         # Scroll the first part of the text
                         if(LCD_line_three_scroll_counter<len(LCD_line_three)):
                             sendToLCD(2, LCD_line_three[LCD_line_three_scroll_counter-20:LCD_line_three_scroll_counter])
@@ -270,7 +274,7 @@ try:
                 if(len(LCD_line_four) > 20):
                     if text_split_string_setting not in LCD_line_four:
                         #Add text-separator to text
-                        LCD_line_four = LCD_line_four + str(text_split_string_setting)
+                        LCD_line_four = LCD_line_four + xstr(text_split_string_setting)
                             # Scroll the first part of the text
                         if(LCD_line_four_scroll_counter<len(LCD_line_four)):
                             sendToLCD(3, LCD_line_four[LCD_line_four_scroll_counter-20:LCD_line_four_scroll_counter])
@@ -306,11 +310,11 @@ try:
                     info_configured = False
                 # Extract title, artist and album from new info
                 if(info_configured == False):
-                    title = str(info['title'])
-                    artist = str(info['artist'])
-                    album = str(info['album'])
-                    trackType = str(info['trackType'])
-                    status = str(info['status'])
+                    title = xstr(info['title'])
+                    artist = xstr(info['artist'])
+                    album = xstr(info['album'])
+                    trackType = xstr(info['trackType'])
+                    status = xstr(info['status'])
 
                     if(str(trackType) == 'webradio' and info_configured == False and status != 'stop'):
                         # Webradio's always display their song-info in the title-value and their radio station in the artist-value,
@@ -320,32 +324,32 @@ try:
                         if(status == 'play'):
                             # Display information about current webradio music
                             if(type(title) == list and len(title) == 2):
-                                LCD_line_one = str(title[0])
-                                LCD_line_two = str(title[1])
-                                LCD_line_three = str(artist)
+                                LCD_line_one = xstr(title[0])
+                                LCD_line_two = xstr(title[1])
+                                LCD_line_three = xstr(artist)
                                 LCD_line_four = ' '
                             else:
-                                LCD_line_one = str(title)
-                                LCD_line_two = str(artist)
+                                LCD_line_one = xstr(title)
+                                LCD_line_two = xstr(artist)
                                 LCD_line_three = ' '
                                 LCD_line_four = ' '
 
                     elif(str(trackType) != 'webradio' and info_configured == False and status != 'stop'):
                         # If every information we need is present, display it
                         if(len(str(title)) > 0 and len(str(artist)) > 0 and len(str(album)) > 0):
-                            LCD_line_one = str(title)
-                            LCD_line_two = str(artist)
+                            LCD_line_one = xstr(title)
+                            LCD_line_two = xstr(artist)
                             if(len(str(album)) > 0):
-                                LCD_line_three = str(album)
+                                LCD_line_three = xstr(album)
                             else:
                                 LCD_line_three = " "
                             LCD_line_four = " "
                         # If some information is present, display it
                         elif(len(str(title)) > 0 and len(str(artist)) > 0):
-                            LCD_line_one = str(title)
-                            LCD_line_two = str(artist)
+                            LCD_line_one = xstr(title)
+                            LCD_line_two = xstr(artist)
                             if(len(str(album)) > 0):
-                                LCD_line_three = str(album)
+                                LCD_line_three = xstr(album)
                             else:
                                 LCD_line_three = " "
                             LCD_line_four = " "
@@ -361,10 +365,10 @@ try:
                             
                             title = music_info.split_text(title)
                             if(len(str(title[1])) > 0):
-                                LCD_line_one = str(title[0])
-                                LCD_line_two = str(title[1])
+                                LCD_line_one = xstr(title[0])
+                                LCD_line_two = xstr(title[1])
                                 if(len(str(album)) > 0):
-                                    LCD_line_three = str(album)
+                                    LCD_line_three = xstr(album)
                                 else:
                                     LCD_line_three = " "
                         if(status == 'pause'):
@@ -381,10 +385,10 @@ try:
 
                 # Fix types in case they have weird types like chars/arrays
                 # Also, cut the text because the user wants that
-                LCD_line_one = str(LCD_line_one[0:20])
-                LCD_line_two = str(LCD_line_two[0:20])
-                LCD_line_three = str(LCD_line_three[0:20])
-                LCD_line_four = str(LCD_line_four[0:20])
+                LCD_line_one = xstr(LCD_line_one[0:20])
+                LCD_line_two = xstr(LCD_line_two[0:20])
+                LCD_line_three = xstr(LCD_line_three[0:20])
+                LCD_line_four = xstr(LCD_line_four[0:20])
 
 
                 if(LCD_line_one_text_sent != LCD_line_one):
