@@ -101,6 +101,7 @@ try:
 	status = info['status']
 	title_splitter_found = False
 	if(text_scroll > 0):
+        print(info)
 		if(str(text_scroll) == "1"):
 			# Value is 1, scroll the text if too long
 			while(True):
