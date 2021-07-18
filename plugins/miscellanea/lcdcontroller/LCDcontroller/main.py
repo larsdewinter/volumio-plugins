@@ -284,11 +284,11 @@ try:
                             else:
                                 sendToLCD(3, LCD_line_four[LCD_line_four_scroll_counter-20:] + LCD_line_four[0:LCD_line_four_scroll_counter-len(LCD_line_four)])
                                 LCD_line_four_scroll_counter+=1
-                    else:
-                        # Do not resend any previously sent text
-                        if(LCD_line_four_text_sent != LCD_line_four):
-                            sendToLCD(3, LCD_line_four)
-                            LCD_line_four_text_sent = LCD_line_four
+                else:
+                    # Do not resend any previously sent text
+                    if(LCD_line_four_text_sent != LCD_line_four):
+                        sendToLCD(3, LCD_line_four)
+                        LCD_line_four_text_sent = LCD_line_four
                 sleep(1.2)
         elif(str(text_scroll) == "2"):
             # Value is 2, truncate the text
