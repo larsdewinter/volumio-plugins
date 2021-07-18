@@ -32,7 +32,6 @@ class MusicInfo():
         # retreive new info
         # execute the volumio.sh command and read it's output
         new_info = os.popen('/volumio/app/plugins/system_controller/volumio_command_line_client/volumio.sh status').read()
-        print(new_info)
         
         # Convert the info to a dictionary
         new_info = json.loads(new_info)
@@ -84,6 +83,7 @@ class MusicInfo():
             self.info = os.popen('/volumio/app/plugins/system_controller/volumio_command_line_client/volumio.sh status').read()
             # Convert the info to a dictionary
             self.info = json.loads(self.info)
+        print(self.info)
 	    # Check for empty values before returning them, to prevent errors
         if 'title' not in self.info:
             self.info['title'] = ' '
