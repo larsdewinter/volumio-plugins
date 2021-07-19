@@ -42,13 +42,13 @@ class lcd:
     """display a string on the given line of the display, 1 or 2, string is truncated to 20 chars and centred"""
     centered_string = string.center(20)
     if line == 1:
-      self.device.set_cursor(1,0)
+      self.device.set_cursor(0,0)
     if line == 2:
-      self.device.set_cursor(1,1)
+      self.device.set_cursor(0,1)
     if line == 3:
-      self.device.set_cursor(1,2)
+      self.device.set_cursor(0,2)
     if line == 4:
-      self.device.set_cursor(1,3)
+      self.device.set_cursor(0,3)
     for char in centered_string:
       self.device.write8(ord(char), True)
 
