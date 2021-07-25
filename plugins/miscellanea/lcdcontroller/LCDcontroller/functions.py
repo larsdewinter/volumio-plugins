@@ -49,7 +49,7 @@ class MusicInfo():
         # Check if the title has changed
         if(new_info['title'] != current_info['title']):
         # The info has changed, return the new info
-            if new_info['title'] is None:
+            if new_info['title'] is None or "mp3?" in new_info['title']:
                 new_info['title'] = ' '
             self.info = new_info
             return True
