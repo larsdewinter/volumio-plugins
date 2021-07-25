@@ -184,7 +184,11 @@ try:
                                     LCD_line_three = " "
                         if(status == 'pause'):
                             LCD_line_four = "||"
-
+                    elif(status == 'stop'):
+                        LCD_line_one = xstr(title)                        
+                        LCD_line_two = datetime.datetime.now().strftime("%H:%M:%S %d-%m-%Y")
+                        LCD_line_three = ' '
+                        LCD_line_four = ' '
                     else:
                         LCD_line_one = " "
                         LCD_line_two = " "
@@ -378,7 +382,6 @@ try:
                         LCD_line_two = datetime.datetime.now().strftime("%H:%M:%S %d-%m-%Y")
                         LCD_line_three = ' '
                         LCD_line_four = ' '
-
                     else:
                         LCD_line_one = " "
                         LCD_line_two = " "
