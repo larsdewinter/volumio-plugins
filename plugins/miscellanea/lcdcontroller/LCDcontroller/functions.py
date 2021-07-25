@@ -84,13 +84,17 @@ class MusicInfo():
             # Convert the info to a dictionary
             self.info = json.loads(self.info)
 	    # Check for empty values before returning them, to prevent errors
-        if 'title' not in self.info:
-            self.info['title'] = ' '
-        if 'artist' not in self.info:
-            self.info['artist'] = ' '
-        if 'album' not in self.info:
-            self.info['album'] = ' '
+            if 'title' not in self.info:
+                self.info['title'] = ' '
+            if 'artist' not in self.info:
+                self.info['artist'] = ' '
+            if 'album' not in self.info:
+                self.info['album'] = ' '
             # return the info
+
+            if "mp3?" in self.info['title']:
+                self.into['title'] = ' '
+
             return self.info
         else:
 	    # return the info
