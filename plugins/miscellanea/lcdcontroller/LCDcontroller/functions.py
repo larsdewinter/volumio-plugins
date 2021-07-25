@@ -46,10 +46,13 @@ class MusicInfo():
             new_info['trackType'] = ' '
         if 'status' not in new_info:
             new_info['status'] = ' '
+
+        if "mp3?" in new_info['title']:
+            new_info['title'] = ' '
         # Check if the title has changed
         if(new_info['title'] != current_info['title']):
         # The info has changed, return the new info
-            if new_info['title'] is None or "mp3?" in new_info['title']:
+            if new_info['title'] is None:
                 new_info['title'] = ' '
             self.info = new_info
             return True
