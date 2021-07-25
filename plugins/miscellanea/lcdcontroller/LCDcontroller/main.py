@@ -7,6 +7,7 @@ from os import *
 from time import *
 from sys import *
 from math import *
+import datetime
 
 #import LCD-related python libs
 from lcd_display import lcd
@@ -372,6 +373,11 @@ try:
                                     LCD_line_three = " "
                         if(status == 'pause'):
                             LCD_line_four = "||"
+                    elif(status == 'stop'):
+                        LCD_line_one = xstr(title)                        
+                        LCD_line_three = datetime.datetime.now().strftime("%H:%M:%S %d-%m-%Y")
+                        LCD_line_two = ' '
+                        LCD_line_four = ' '
 
                     else:
                         LCD_line_one = " "
